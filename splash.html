@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Expense Manager</title>
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <style>
+
+  html, body, .viewport {
+    width: 100%;
+    height: 100%; 
+    margin: 0;
+  }
+
+  .flex-container {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  #flex-item {
+   text-align: center;
+   margin: auto;
+ }
+</style>
+</head>
+<body  >
+  <!--Your Splash Screen-->
+  <div id="splash"  class="flex-container" 
+  style ="background: #fff ; display: none"  >
+
+  <!--Center align Splash contents in all screen sizes-->
+  <br><br><br><div id="flex-item" >
+    <img src="images/favicon.png" 
+    alt="app_icon" 
+    style=";width:350px ; height :350px"
+    />
+
+    <h2 style ="color:#404040;">Expense Manager<h2>
+    </div>
+  </div>
+  <!--  Scripts-->
+  <script type="text/javascript">
+
+    function fade(element) {
+        var op = 1;  // initial opacity
+        var timer = setInterval(function () {
+          if (op <= 0.1){
+            clearInterval(timer);
+
+            window.open("index.html", "_self");
+          }
+          element.style.opacity = op;
+          element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+          op -= op * 0.1;
+        }, 50);
+      }
+
+      setTimeout(function(){ 
+
+       if(typeof(Storage) !== "undefined") {
+
+        console.log("Already shown" +sessionStorage.getItem('spalashShown'));
+
+        if( !sessionStorage.getItem('spalashShown') || sessionStorage.getItem('spalashShown') === null ) {  
+
+         document.getElementById('splash') .style.display = 'inline';
+
+                    //Display splash
+                    setTimeout(function(){   
+
+                     fade(document.getElementById('splash'));
+                      // document.getElementById('splash') .style.display = 'none'
+                       // window.location = "http://hiteshsahu.com";
+
+                       sessionStorage.setItem('spalashShown', true  );
+                     }
+                     , 3000);
+
+                  } else {
+
+                         //Display Main Content
+                         document.getElementById('splash') .style.display = 'none'
+                         console.log("Already shown");
+                       }
+                     }
+
+                     else {
+                      document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+                    }
+                  }, 0);
+
+                </script>
+              </body>
+              </html>
